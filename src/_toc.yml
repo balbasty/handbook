@@ -1,0 +1,18 @@
+format: jb-book
+root: intro
+parts:
+  - caption: Probability distributions
+    chapters:
+    - file: prob/normal-univariate
+    - file: prob/normal-bivariate
+    - file: prob/normal-multivariate
+    - file: prob/l1-multivariate
+    - file: prob/gamma
+  - caption: Statistical Parameteric Mapping
+    chapters:
+    - file: spm/glm
+    - file: spm/reml
+    - file: spm/gllm
+  - caption: Appendices
+    chapters:
+    - file: app/glossary

@@ -1,0 +1,26 @@
+title: Handbook of Statistical Modelling and Image Computing
+author: Yael Balbastre
+execute:
+  execute_notebooks: force
+bibtex_bibfiles:
+  - references.bib
+sphinx:
+  extra_extensions:
+    - sphinx_proof
+  config:
+    bibtex_reference_style: author_year
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - linkify
+    - colon_fence
+    - substitution
+    - tasklist
+    - colon_fence
+    - deflist
+    # - replacements
+    # - smartquotes
+    # - html_admonition
+    # - html_image
+    # - amsmath

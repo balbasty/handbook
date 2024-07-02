@@ -1,0 +1,67 @@
+$$
+\DeclareMathOperator*{\argmin}{\arg\!\min}%
+\DeclareMathOperator*{\argmax}{\arg\!\max}%
+\newcommand{\tensor}[1]{\mathsfbfun{#1}}%
+\newcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}%
+\newcommand{\mat}[1]{\boldsymbol{\mathbf{#1}}}%
+\newcommand{\T}{^\mathrm{T}}%
+\newcommand{\H}{^\mathrm{H}}%
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}%
+\newcommand{\Diff}[1]{\mathop{}\!\mathrm{d^#1}}%
+\newcommand{\dequal}{\overset{\Delta}{=}}%
+\newcommand{\cequal}{\overset{c}{=}}%
+\newcommand{\capprox}{\overset{c}{\approx}}%
+\newcommand{\defeq}{\vcentcolon=}%
+\newcommand{\eqdef}{=\vcentcolon}%
+\newcommand{\cov}{\operatorname{cov}{}}%
+\newcommand{\tr}{\operatorname{Tr}{}}%
+\newcommand{\dett}[1]{\left|#1\right|}%
+\newcommand{\ex}[1]{\langle#1\rangle}%
+\newcommand{\Simplex}[1]{\mathrm{\Delta}^{#1}}%
+\newcommand{\diag}[1]{\ensuremath{\operatorname{diag}\left(#1\right)}}%
+\newcommand{\Dist}[3][]{%
+    #2_{#1}\left(#3\right)%
+}%
+\newcommand{\DistCond}[4][]{%
+    #2_{#1}\left(#3~\middle|~#4\right)%
+}%
+\newcommand{\Div}[4][]{%
+    #2_{#1}\left(#3~\middle|\middle|~#4\right)%
+}%
+\newcommand{\NamedDiv}[4][]{%
+    \Div[#1]{\mathrm{#2}}{#3}{#4}%
+}%
+\newcommand{\KL}[3][]{%
+    \NamedDiv[#1]{KL}{#2}{#3}%
+}%
+\newcommand{\Expect}[3][]{%
+    \mathbb{#2}_{#1}\left[#3\right]%
+}%
+\newcommand{\ExpectCond}[4][]{%
+    \mathbb{#2}_{#1}\left[#3~\middle\middle|~#4\right]%
+}%
+\newcommand{\NamedDistCond}[4][]{%
+    \DistCond[#1]{\mathrm{#2}}{#3}{#4}%
+}%
+\newcommand{\NamedDist}[3][]{%
+    \Dist[#1]{\mathrm{#2}}{#3}%
+}%
+\newcommand{\pcond}[3][]{\DistCond[#1]{p}{#2}{#3}}%
+\newcommand{\p}[2][]{\Dist[#1]{p}{#2}}%
+\newcommand{\qcond}[3][]{\DistCond[#1]{q}{#2}{#3}}%
+\newcommand{\q}[2][]{\Dist[#1]{q}{#2}}%
+\newcommand{\NCond}[3][]{\DistCond[#1]{\mathcal{N}}{#2}{#3}}%
+\newcommand{\N}[2][]{\Dist[#1]{\mathcal{N}}{#2}}%
+\newcommand{\WishartCond}[3][]{\DistCond[#1]{\mathcal{W}}{#2}{#3}}%
+\newcommand{\Wishart}[2][]{\Dist[#1]{\mathcal{W}}{#2}}%
+\newcommand{\LaplaceCond}[3][]{\DistCond[#1]{\mathcal{L}}{#2}{#3}}%
+\newcommand{\Laplace}[2][]{\Dist[#1]{\mathcal{L}}{#2}}%
+\newcommand{\CatCond}[3][]{\DistCond[#1]{\operatorname{Cat}}{#2}{#3}}%
+\newcommand{\Cat}[2][]{\Dist[#1]{\operatorname{Cat}}{#2}}%
+\newcommand{\ExCond}[3][]{\ExpectCond[#1]{E}{#2}{#3}}%
+\newcommand{\Ex}[2][]{\Expect[#1]{E}{#2}}%
+\newcommand{\VarCond}[3][]{\ExpectCond[#1]{V}{#2}{#3}}%
+\newcommand{\Var}[2][]{\Expect[#1]{V}{#2}}%
+\newcommand{\SDCond}[3][]{\ExpectCond[#1]{SD}{#2}{#3}}%
+\newcommand{\SD}[2][]{\Expect[#1]{SD}{#2}}%
+$$
