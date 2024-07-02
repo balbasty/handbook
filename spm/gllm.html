@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -343,6 +343,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-bayesian-optimization">Variational Bayesian optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reml">ReML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -356,7 +357,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="general-log-linear-model-gllm">
-<h1>General Log-Linear Model (GLLM)<a class="headerlink" href="#general-log-linear-model-gllm" title="Link to this heading">#</a></h1>
+<span id="spm-gllm"></span><h1>General Log-Linear Model (GLLM)<a class="headerlink" href="#general-log-linear-model-gllm" title="Link to this heading">#</a></h1>
 <p>Let us now assume a log-linear variant of the GLM, where</p>
 <div class="math notranslate nohighlight">
 \[
@@ -373,7 +374,7 @@ maximum-likelihood <span class="math notranslate nohighlight">\(\hat{\mathbf{B}}
 <p>We propose two algorithms to estimate the posterior distribution
 over <span class="math notranslate nohighlight">\(\hat{\mathbf{B}}\)</span>, assuming a flat prior.</p>
 <section id="laplace-approximation">
-<h2>Laplace approximation<a class="headerlink" href="#laplace-approximation" title="Link to this heading">#</a></h2>
+<span id="spm-gllm-laplace"></span><h2>Laplace approximation<a class="headerlink" href="#laplace-approximation" title="Link to this heading">#</a></h2>
 <p>The first method uses Laplace’s approximation.</p>
 <div class="admonition-laplace-approximation admonition">
 <p class="admonition-title">Laplace approximation</p>
@@ -597,7 +598,7 @@ p\left(\mathbf{b}_n\mid\mathbf{y}_n\right)
 \end{align*}
 \end{split}\]</div>
 <section id="expectation-of-a-lognormal-random-variable">
-<h3>Expectation of a LogNormal random variable<a class="headerlink" href="#expectation-of-a-lognormal-random-variable" title="Link to this heading">#</a></h3>
+<span id="spm-gllm-elognormal"></span><h3>Expectation of a LogNormal random variable<a class="headerlink" href="#expectation-of-a-lognormal-random-variable" title="Link to this heading">#</a></h3>
 <div class="admonition-moments-of-the-lognormal-distribution admonition">
 <p class="admonition-title">Moments of the LogNormal distribution</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathbf{x} \sim \mathcal{N}\left(\boldsymbol\mu, \boldsymbol\Sigma\right)\)</span>
@@ -617,7 +618,7 @@ under the approximate posterior.</p>
 </section>
 </section>
 <section id="variational-bayesian-optimization">
-<h2>Variational Bayesian optimization<a class="headerlink" href="#variational-bayesian-optimization" title="Link to this heading">#</a></h2>
+<span id="spm-gllm-vbayes"></span><h2>Variational Bayesian optimization<a class="headerlink" href="#variational-bayesian-optimization" title="Link to this heading">#</a></h2>
 <p>An alternative approach consists of</p>
 <ol class="arabic simple">
 <li><p>Encode the approximate posterior as a Gaussian</p></li>
@@ -635,10 +636,39 @@ q\left(\mathbf{b}_n\right)
 <ol class="arabic simple" start="2">
 <li><p>Find the parameters <span class="math notranslate nohighlight">\(\hat{\mathbf{b}}_n\)</span> and <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\Sigma}}_n\)</span>
 that makes <span class="math notranslate nohighlight">\(q\)</span> closest to the true posterior in terms of the Kullback-Leibler
-divergence <span class="math notranslate nohighlight">\(KL\left(q ~\middle\|~ p\right)\)</span>.</p></li>
+divergence <span class="math notranslate nohighlight">\(\operatorname{KL}\left(q ~\middle\|~ p\right)\)</span>.</p></li>
 </ol>
 <p>This approach, which replaces <em>computing</em> the posterior with <em>optimizing</em>
 a <em>family</em> of posteriors, is known as Variational Bayes.</p>
+<p>(Derivations in progress…)</p>
+</section>
+<section id="reml">
+<span id="spm-gllm-reml"></span><h2>ReML<a class="headerlink" href="#reml" title="Link to this heading">#</a></h2>
+<p>The estimation of the covariance with ReML works exactly like in the linear
+case, except that we have the following substitutions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathbf{XB}^\ast
+&amp; ~~\rightarrow~~
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]
+\\
+N\mathbf{X}\boldsymbol{\Sigma}^\ast\mathbf{X}^\mathrm{T}
+&amp; ~~\rightarrow~~
+\mathbb{E}\left[
+    \exp.\left(\mathbf{X}\mathbf{B}\right)
+    \exp.\left(\mathbf{X}\mathbf{B}\right)^\mathrm{T}
+\right] -
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]^\mathrm{T}
+\end{align*}
+\end{split}\]</div>
+<p>where the expectations are computed using the identity from section
+<a class="reference internal" href="#spm-gllm-elognormal"><span class="std std-ref">Expectation of a LogNormal random variable</span></a>.</p>
+<p>However, we cannot use the same simplifications as in the linear case,
+so updates are slightly less computationally efficient. Furthermore,
+we must alternate between updating the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>
+and refining the nonlinear fit with the updated covariance matrix.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
@@ -726,6 +756,7 @@ a <em>family</em> of posteriors, is known as Variational Bayes.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-bayesian-optimization">Variational Bayesian optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reml">ReML</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
