@@ -1,3 +1,4 @@
+(spm:gllm)=
 # General Log-Linear Model (GLLM)
 
 Let us now assume a log-linear variant of the GLM, where
@@ -20,6 +21,7 @@ $p(\mathbf{B}\mid\mathbf{Y})$) exists.
 We propose two algorithms to estimate the posterior distribution
 over $\hat{\mathbf{B}}$, assuming a flat prior.
 
+(spm:gllm:laplace)=
 ## Laplace approximation
 
 The first method uses Laplace's approximation.
@@ -257,6 +259,7 @@ p\left(\mathbf{b}_n\mid\mathbf{y}_n\right)
 \end{align*}
 $$
 
+(spm:gllm:elognormal)=
 ### Expectation of a LogNormal random variable
 
 :::{admonition} Moments of the LogNormal distribution
@@ -276,6 +279,7 @@ We can use this identity to compute the _expected_ model fit
 $\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]$
 under the approximate posterior.
 
+(spm:gllm:vbayes)=
 ## Variational Bayesian optimization
 
 An alternative approach consists of
@@ -293,10 +297,43 @@ $$
 
 2. Find the parameters $\hat{\mathbf{b}}_n$ and $\hat{\boldsymbol{\Sigma}}_n$
 that makes $q$ closest to the true posterior in terms of the Kullback-Leibler
-divergence $KL\left(q ~\middle\|~ p\right)$.
+divergence $\operatorname{KL}\left(q ~\middle\|~ p\right)$.
 
 This approach, which replaces _computing_ the posterior with _optimizing_
 a _family_ of posteriors, is known as Variational Bayes.
+
+(Derivations in progress...)
+
+(spm:gllm:reml)=
+## ReML
+
+The estimation of the covariance with ReML works exactly like in the linear
+case, except that we have the following substitutions:
+
+$$
+\begin{align*}
+\mathbf{XB}^\ast
+& ~~\rightarrow~~
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]
+\\
+N\mathbf{X}\boldsymbol{\Sigma}^\ast\mathbf{X}^\mathrm{T}
+& ~~\rightarrow~~
+\mathbb{E}\left[
+    \exp.\left(\mathbf{X}\mathbf{B}\right)
+    \exp.\left(\mathbf{X}\mathbf{B}\right)^\mathrm{T}
+\right] -
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]
+\mathbb{E}\left[\exp.\left(\mathbf{X}\mathbf{B}\right)\right]^\mathrm{T}
+\end{align*}
+$$
+
+where the expectations are computed using the identity from section
+{ref}`spm:gllm:elognormal`.
+
+However, we cannot use the same simplifications as in the linear case,
+so updates are slightly less computationally efficient. Furthermore,
+we must alternate between updating the covariance matrix $\mathbf{C}$
+and refining the nonlinear fit with the updated covariance matrix.
 
 ## References
 ```{bibliography}
